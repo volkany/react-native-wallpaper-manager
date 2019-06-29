@@ -10,20 +10,11 @@
 `$ react-native link react-native-wallpaper-manager`
 
 ### Manual installation
-
-
-#### iOS
-
-1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `react-native-wallpaper-manager` and add `RNWallv.xcodeproj`
-3. In XCode, in the project navigator, select your project. Add `libRNWallv.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-4. Run your project (`Cmd+R`)<
-
 #### Android
 
 1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import com.reactlibrary.RNWallvPackage;` to the imports at the top of the file
-  - Add `new RNWallvPackage()` to the list returned by the `getPackages()` method
+  - Add `import com.volkan.WallpaperManager;` to the imports at the top of the file
+  - Add `new WallpaperManager()` to the list returned by the `getPackages()` method
 2. Append the following lines to `android/settings.gradle`:
   	```
   	include ':react-native-wallpaper-manager'
@@ -34,19 +25,16 @@
       compile project(':react-native-wallpaper-manager')
   	```
 
-#### Windows
-[Read it! :D](https://github.com/ReactWindows/react-native)
-
-1. In Visual Studio add the `RNWallv.sln` in `node_modules/react-native-wallpaper-manager/windows/RNWallv.sln` folder to their solution, reference from their app.
-2. Open up your `MainPage.cs` app
-  - Add `using Wallv.RNWallv;` to the usings at the top of the file
-  - Add `new RNWallvPackage()` to the `List<IReactPackage>` returned by the `Packages` method
-
-
 ## Usage
 ```javascript
-import RNWallv from 'react-native-wallpaper-manager';
+import WallpaperManager from 'react-native-wallpaper-manager';
+...
+WallpaperManger.setWallpaper("https://picsum.photos/id/881/1080/2560", WallpaperManger.ALL, (err, resultCode) => {
+	if(err || resultCode === -1) {
+		if(err === "loadFailed") return alert("Unable to load the photo.")
+		else return alert("Unknown error.")
+	}
+	alert("Wallpaper set!")
+})
 
-// TODO: What to do with the module?
-RNWallv;
 ```
